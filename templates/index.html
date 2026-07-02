@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница для практики Playwright</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        .box { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; max-width: 500px; }
+        .success { color: green; display: none; }
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Работа с формами и кнопками -->
+    <div class="box">
+        <h2>Ввод данных</h2>
+        <label for="username">Имя:</label>
+        <input type="text" id="username" placeholder="Введите имя">
+        <br><br>
+
+        <button id="submit-btn">Отправить</button>
+        <p id="success-message" class="success">Данные успешно отправлены!</p>
+    </div>
+
+    <!-- 2. Выпадающие списки и чекбоксы -->
+    <div class="box">
+        <h2>Выбор опций</h2>
+        <label for="cars">Выберите автомобиль:</label>
+        <select id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+        <br><br>
+        <input type="checkbox" id="subscribe" name="subscribe">
+        <label for="subscribe">Подписаться на рассылку</label>
+    </div>
+
+    <!-- 3. Таблица и поиск элементов -->
+    <div class="box">
+        <h2>Таблица пользователей</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Роль</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Анна</td>
+                <td>Админ</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Иван</td>
+                <td>Пользователь</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 4. Асинхронность (появление элемента через время) -->
+    <div class="box">
+        <h2>Ожидание события</h2>
+        <button id="load-data-btn">Загрузить данные</button>
+        <div id="loading" style="display: none;">Загрузка...</div>
+        <p id="loaded-text" style="display: none;">Контент загружен!</p>
+    </div>
+
+    <script>
+        // Скрипт для интерактива
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            document.getElementById('success-message').style.display = 'block';
+        });
+
+        document.getElementById('load-data-btn').addEventListener('click', () => {
+            const loadingDiv = document.getElementById('loading');
+            const loadedText = document.getElementById('loaded-text');
+            loadingDiv.style.display = 'block';
+            loadedText.style.display = 'none';
+
+            setTimeout(() => {
+                loadingDiv.style.display = 'none';
+                loadedText.style.display = 'block';
+            }, 2000); // Появление через 2 секунды
+        });
+    </script>
+</body>
+</html>
