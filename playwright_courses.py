@@ -22,7 +22,6 @@ with sync_playwright() as playwright:
     registration_button.click()
     context.storage_state(path="browser-state.json")
 
-    page.wait_for_timeout(2000)
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=False)
