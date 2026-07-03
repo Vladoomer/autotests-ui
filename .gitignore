@@ -1,1 +1,5 @@
 browser-state.json
+
+.venv
+.idea
+./.idea
