@@ -3,3 +3,4 @@ browser-state.json
 .venv
 .idea
 ./.idea
+__pycache__
