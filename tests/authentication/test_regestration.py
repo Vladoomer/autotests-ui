@@ -3,12 +3,14 @@ import pytest
 from allure_commons.types import Severity
 from playwright.sync_api import Page
 
+from config import settings
 from pages.dashboard.dashboard_page import DashboardPage
 from pages.authentication.registration_page import RegistrationPage
 from tools.allure.epics import AllureEpic
 from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStory
 from tools.allure.tags import AllureTag
+from tools.routes import AppRoute
 
 
 @pytest.mark.regression
@@ -24,8 +26,12 @@ class TestRegistration:
     @allure.title("Registration with correct email, username and password")
     @allure.severity(Severity.BLOCKER)
     def test_successful_registration(self, chromium_page: Page, registration_page: RegistrationPage, dashboard_page: DashboardPage):
-        registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
-        registration_page.registration_form.fill(email='user@gm.com', password='asds', username='vlad')
-        registration_page.registration_form.check_visible(email='user@gm.com', password='asds', username='vlad')
+        registration_page.visit(AppRoute.REGISTRATION)
+        registration_page.registration_form.fill(email=settings.test_user.email,
+                                                 password=settings.test_user.password,
+                                                 username=settings.test_user.username)
+        registration_page.registration_form.check_visible(email=settings.test_user.email,
+                                                 password=settings.test_user.password,
+                                                 username=settings.test_user.username)
         registration_page.click_registration_button()
         dashboard_page.toolbar_view.check_visible()

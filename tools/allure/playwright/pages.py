@@ -1,14 +1,20 @@
 import allure
 from playwright.sync_api import Page, Playwright
+from config import settings, Browser
 
 
 def initialize_playwright_pages(
         playwright: Playwright,
+        browser_type: Browser,
         storage_state: str | None = None
+    ) -> Page:
 
-) -> Page:
-    browser = playwright.chromium.launch(headless=False)
-    context = browser.new_context(storage_state=storage_state, record_video_dir='./videos')
+    browser = playwright[browser_type].launch(headless=settings.headless)
+    context = browser.new_context(
+        base_url=settings.get_base_url(),
+        storage_state=storage_state,
+        record_video_dir=settings.videos_dir
+    )
     page = context.new_page()
 
     yield page
