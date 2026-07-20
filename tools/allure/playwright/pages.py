@@ -1,6 +1,7 @@
 import allure
 from playwright.sync_api import Page, Playwright
 from config import settings, Browser
+from tools.allure.playwright.mocks import mock_static_resource
 
 
 def initialize_playwright_pages(
@@ -16,6 +17,7 @@ def initialize_playwright_pages(
         record_video_dir=settings.videos_dir
     )
     page = context.new_page()
+    mock_static_resource(page)
 
     yield page
     browser.close()
