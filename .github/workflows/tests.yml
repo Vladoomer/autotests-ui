@@ -54,7 +54,4 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
-#  publish-report:
-#    runs-on: ubuntu-latest
-#    steps:
-#
+
